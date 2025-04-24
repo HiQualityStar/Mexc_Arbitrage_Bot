@@ -9,17 +9,16 @@ const secretKey = process.env.SecretKey as string;
 
 const newOrder = async () => {
   try {
-    // 1. Get MEXC server time
     const { data } = await axios.get("https://api.mexc.com/api/v3/time");
     const timestamp = data.serverTime.toString(); // must be string
-
+    console.log("started", new Date(data.serverTime));
     // 2. Prepare query parameters
     const params = {
       symbol: "SOLUSDT",
       side: "BUY",
-      type: "LIMIT",
-      quantity: "50",
-      price: "145",
+      type: "MARKET",
+      quantity: "0.01",
+      //   price: "145",
       recvWindow: "180",
       timestamp,
     };
